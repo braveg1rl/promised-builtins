@@ -36,10 +36,9 @@ Putting it all together:
 ```coffee
 getKeywords = ->
   deferredKeywordsField = Q.defer()
-  promisedKeywordsField = new PromisedString deferredKeywordsField
   setImmediate ->
     deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
-  promisedKeyWordsField
+  new PromisedString deferredKeywordsField
 
 # We play dumb and act like this is sync code,
 # like the objects in play are actual builtins.
