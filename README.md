@@ -41,7 +41,9 @@ getKeywords = ->
     deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
   promisedKeyWordsField
 
-keywordsField = getKeywords() # We play dumb and act like this is sync code
+# We play dumb and act like this is sync code,
+# like the objects in play are actual builtins.
+keywordsField = getKeywords()
 keywords = keywordsField.split ", "
 keywords.forEach (keyword) -> console.log keyword # works
 ```
