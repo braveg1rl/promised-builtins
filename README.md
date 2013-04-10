@@ -38,7 +38,7 @@ getKeywords = ->
   deferredKeywordsField = Q.defer()
   promisedKeywordsField = new PromisedString deferredKeywordsField
   setImmediate ->
-   deferredKeywords.resolve("promises, deferreds, builtins, javascript, asynchronous")
+    deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
   promisedKeyWordsField
 
 keywordsField = getKeywords() # We play dumb and act like this is sync code
