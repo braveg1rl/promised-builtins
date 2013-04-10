@@ -1,9 +1,9 @@
 # promised-builtins
 
 Promises that somewhat act like the builtins that are promised.
+All in all, this should be considered an experiment in code.
 
 ## Usage
-
 
 ```coffee
 promisedString = new PromisedString deferred
@@ -45,6 +45,13 @@ keywordsField = getKeywords() # We play dumb and act like this is sync code
 keywords = keywordsField.split ", "
 keywords.forEach (keyword) -> console.log keyword # works
 ```
+
+## Limitations
+
+* You can't use normal operators on the promised builtins.
+* You can't pass the promised builtin as an argument to a function that expects a regular builtin. A function should be specifically adjusted to accept a promised builtin (but this is certainly possible).
+
+Every time you have an accute need for true values, you need to call `promisedValue.then` to get (or rather, wait for) the true value. But in some cases, you may be able to do without. That is, until your (logical) algorithm has finished, and you want to output something.
 
 ## Credits
 
