@@ -1,3 +1,5 @@
+require "setimmediate"
+
 shelf = require "./shelf"
 
 module.exports =

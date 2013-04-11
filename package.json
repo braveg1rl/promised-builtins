@@ -12,7 +12,8 @@
   },
   "private": false,
   "dependencies": {
-    "rsvp": "~1.2.0"
+    "rsvp": "~1.2.0",
+    "setimmediate": "~1.0.1"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2",

@@ -1,3 +1,5 @@
+require "setimmediate"
+
 trueKeywordsField = "promises, deferreds, builtins, javascript, asynchronous"
 trueKeywords = trueKeywordsField.split(", ")
 
