@@ -5,8 +5,11 @@ All in all, this should be considered an experiment in code.
 
 ## Usage
 
+Promised builtins are wrap regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec).
+
 ```coffee
-promisedString = new PromisedString deferred
+deferred = Q.defer() # create a deferred with something, anything
+promisedString = new PromisedString deferred.promise
 ```
 
 Promised builtins are promises, so they support the `then` method.
@@ -15,7 +18,7 @@ Promised builtins are promises, so they support the `then` method.
 promisedString.then (string) -> console.log string
 ```
 
-Promised builtins act as builtins as much as they can. When you call a method on them, they return another promised builtin.
+Promised builtins act as builtins as much as they can. When you call a method on them, they return another promised builtin. For example:
 
 ```coffee
 promisedWords = promisedString.split(", ")
@@ -40,8 +43,8 @@ getKeywords = ->
     deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
   new PromisedString deferredKeywordsField
 
-# We play dumb and act like this is sync code,
-# like the objects in play are actual builtins.
+# We play dumb and act like this is synchronous code,
+# and like the objects in play are actual builtins.
 keywordsField = getKeywords()
 keywords = keywordsField.split ", "
 keywords.forEach (keyword) -> console.log keyword # works
