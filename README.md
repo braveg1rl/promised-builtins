@@ -21,7 +21,7 @@ I'm only concerned about built-in objects of which one can instantiate an instan
 
 Basically, a promised builtin has the same methods as the builtin that is promised. This is where the similarity ends. Most notable:
 
-* You can't use normal operators (`+-/*', `&&`, `||`) or any control flow consructs (`if ... else ...`, `while`, `for`) on the promised builtins.
+* You can't use normal operators (`+-/*`, `&&`, `||`) or any control flow consructs (`if..else..`, `while`, `for`) on the promised builtins.
 * You can't safely pass the promised builtin as an argument to a function that expects a regular builtin. A function should be specifically adjusted to accept a promised builtin (but this is certainly possible). 
 
   To be precise, some non-adapted functions *might* work, since the promised builtins implement the same methods as the regular builtins, but if the function (or any other function it calls) tries to use any operator or control construct to the builtins, the function will fail miserably, surprisingly, or both.
