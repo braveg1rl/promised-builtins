@@ -44,7 +44,7 @@ promisedString.then (string) -> console.log string
 Promised builtins act as builtins as much as they can. When you call a method on them, they return another promised builtin. For example:
 
 ```coffee
-promisedWords = promisedString.split(", ")
+promisedWords = promisedString.split(" ")
 promisedWords.then (words) -> console.log word for word in words
 ```
 
