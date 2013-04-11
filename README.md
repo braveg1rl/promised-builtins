@@ -40,17 +40,19 @@ This means that in some cases, promised builtins work exactly like normal builti
 Q = require "q"
 {PromisedString} = require "promised-builtins"
 
-getKeywords = ->
+getKeywordsField = ->
   deferredKeywordsField = Q.defer()
   setImmediate ->
     deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
-  new PromisedString deferredKeywordsField
+  new PromisedString deferredKeywordsField.promise
 
 # We play dumb and act like this is synchronous code,
 # and like the objects in play are actual builtins.
-keywordsField = getKeywords()
+keywordsField = getKeywordsField()
 keywords = keywordsField.split ", "
 keywords.forEach (keyword) -> console.log keyword # works
+keywordsField = keywords.join ","
+keywordsField.then (keywordsField) -> console.log keywordsField
 ```
 
 ## Limitations
