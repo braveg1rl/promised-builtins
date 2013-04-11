@@ -1,6 +1,6 @@
 # promised-builtins
 
-Promises that somewhat act like the instances of the builtins that are promised. An instance of `PromisedString` acts somewhat like an instance of `String`. An instance of `PromisedArray` acts somewhat like an instance of Array.
+Promises that somewhat act like the instances of the builtins that are promised. An instance of `PromisedString` acts somewhat like an instance of `String`. An instance of `PromisedArray` acts somewhat like an instance of `Array`.
 
 All in all, this should be considered a code experiment.
 
@@ -8,7 +8,7 @@ All in all, this should be considered a code experiment.
 
 Builtin is short-hand for built-in object. The ECMAScript 5 specification defines a built-in object as follows:
 
-> built-in object
+> ### built-in object  
 > object supplied by an ECMAScript implementation, independent of the host environment, that is present at the start of the execution of an ECMAScript program.
 
 [ECMAScript5.1 Spec 4.3.7](http://es5.github.io/#x4.3.6)
@@ -17,16 +17,25 @@ I'm only concerned about built-in objects of which one can instantiate an instan
 
 `Object` and `Function` are certainly interesting too. I'll attend to them in a later stage.
 
+### How promised builtins function
+
+Basically, a promised builtin has the same methods as the builtin that is promised. This is where the similarity ends. Most notable:
+
+* You can't use normal operators (`+-/*', `&&`, `||`) or any control flow consructs (`if ... else ...`, `while`, `for`) on the promised builtins.
+* You can't safely pass the promised builtin as an argument to a function that expects a regular builtin. A function should be specifically adjusted to accept a promised builtin (but this is certainly possible). 
+
+  To be precise, some non-adapted functions *might* work, since the promised builtins implement the same methods as the regular builtins, but if the function (or any other function it calls) tries to use any operator or control construct to the builtins, the function will fail miserably, surprisingly, or both.
+
 ## Usage
 
 Promised builtins wrap regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec).
 
 ```coffee
-deferred = Q.defer() # create a deferred with something, anything
-promisedString = new PromisedString deferred.promise
+promisedString = new PromisedString new RSVP.Promise (resolve) ->
+  setImmediate -> resolve "abc def ghi jkl"
 ```
 
-Promised builtins are promises, so they support the `then` method.
+Promised builtins are promises, so they have a `then` method.
 
 ```coffee
 promisedString.then (string) -> console.log string
@@ -46,19 +55,19 @@ promisedWords.forEach (word) -> console.log word
 ```
 
 Here the actual iteration happens only after the value for words has been resolved.
-This means that in some cases, promised builtins work exactly like normal builtins, resulting in very clean code.
+This means that in some (limited) cases, promised builtins work exactly like normal builtins, resulting in very clean code.
 
 ### Complete example
 
 ```coffee
-Q = require "q"
+RSVP = require "rsvp"
 {PromisedString} = require "promised-builtins"
 
 getKeywordsField = ->
-  deferredKeywordsField = Q.defer()
-  setImmediate ->
-    deferredKeywordsField.resolve("promises, deferreds, builtins, javascript, asynchronous")
-  new PromisedString deferredKeywordsField.promise
+  keywordsFieldPromise = new RSVP.Promise (resolve, reject) ->
+    setImmediate -> 
+      resolve("promises, deferreds, builtins, javascript, asynchronous")
+  new PromisedString keywordsFieldPromise
 
 # We play dumb and act like this is synchronous code,
 # and like the objects in play are actual builtins.
@@ -71,8 +80,7 @@ keywordsField.then (keywordsField) -> console.log keywordsField # works too
 
 ## Limitations
 
-* You can't use normal operators on the promised builtins.
-* You can't pass the promised builtin as an argument to a function that expects a regular builtin. A function should be specifically adjusted to accept a promised builtin (but this is certainly possible).
+
 
 Every time you have an accute need for true values, you need to call `promisedValue.then` to get (or rather, wait for) the true value. But in some cases, you may be able to do without. That is, until your (logical) algorithm has finished, and you want to output something.
 
