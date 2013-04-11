@@ -34,9 +34,12 @@ promisedWords.forEach (word) -> console.log word
 Here the actual iteration happens only after the value for words has been resolved.
 This means that in some cases, promised builtins work exactly like normal builtins, resulting in very clean code.
 
-Putting it all together:
+### Complete example
 
 ```coffee
+Q = require "q"
+{PromisedString} = require "promised-builtins"
+
 getKeywords = ->
   deferredKeywordsField = Q.defer()
   setImmediate ->
