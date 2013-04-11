@@ -28,14 +28,14 @@ Basically, a promised builtin has the same methods as the builtin that is promis
 
 ## Usage
 
-You create an instance of a promised builtin by passing a `(resolve, reject)` function to its constructor. This callback is called immediately by the construcor so any calls to `resolve` or `reject` can scheduled.
+You create an instance of a promised builtin by passing a `(resolve, reject)` function to its constructor. This callback is called immediately by the construcor so any calls to `resolve` or `reject` can scheduled. This mirrors  the new instantiation style of [RSVP 2.0](https://github.com/tildeio/rsvp.js).
 
 ```coffee
 promisedString = new PromisedString (resolve, reject) ->
   setImmediate -> resolve "abc def ghi jkl"
 ```
 
-You may also pass any regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec) to the constructor.
+You may also pass any regular [Promise/A+ promise](https://github.com/promises-aplus/promises-spec) to the constructor.
 
 ```coffee
 promisedString = new PromisedString someGenericPromise
@@ -84,9 +84,16 @@ keywordsField.then (keywordsField) -> console.log keywordsField # works too
 
 ## Limitations
 
-
-
 Every time you have an accute need for true values, you need to call `promisedValue.then` to get (or rather, wait for) the true value. But in some cases, you may be able to do without. That is, until your (logical) algorithm has finished, and you want to output something.
+
+## Related work
+
+If you think this is interesting, but haven't heard about the following projects, then they definitely deserve your attention.
+
+* [task.js](http://taskjs.org/) uses promises combined with [ECMAScript 6 generators](http://wiki.ecmascript.org/doku.php?id=harmony:generators) to allow for synchronous processing of the results of promises. Here, because the code after the `yield` keyword actually isn't evaluated until the promise has resolved, the values are the truly resolved values. This is not possible without ES6 though.
+* [Q](https://github.com/kriskowal/q) allows promises to be used as a proxy, with a HTTP-inspired generic interface. You can do `get`, `put`, `del`, `post` on any (virtual) property of the promise, as well as schedule invocation of arbitrary methods.
+* [Wind.js](https://github.com/JeffreyZhao/wind) uses eval to evaluate generated code. Last commit seven months ago.
+* [IcedCoffeeScript](http://maxtaco.github.io/coffee-script/) adds `await` and `defer` keywords to CoffeeScript. Last commit seven months ago.
 
 ## Credits
 
