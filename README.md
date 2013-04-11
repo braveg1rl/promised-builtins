@@ -28,11 +28,17 @@ Basically, a promised builtin has the same methods as the builtin that is promis
 
 ## Usage
 
-Promised builtins wrap regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec).
+You create an instance of a promised builtin by passing a `(resolve, reject)` function to its constructor. This callback is called immediately by the construcor so any calls to `resolve` or `reject` can scheduled.
 
 ```coffee
-promisedString = new PromisedString new RSVP.Promise (resolve) ->
+promisedString = new PromisedString (resolve, reject) ->
   setImmediate -> resolve "abc def ghi jkl"
+```
+
+You may also pass any regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec) to the constructor.
+
+```coffee
+promisedString = new PromisedString someGenericPromise
 ```
 
 Promised builtins are promises, so they have a `then` method.
@@ -60,14 +66,12 @@ This means that in some (limited) cases, promised builtins work exactly like nor
 ### Complete example
 
 ```coffee
-RSVP = require "rsvp"
 {PromisedString} = require "promised-builtins"
 
 getKeywordsField = ->
-  keywordsFieldPromise = new RSVP.Promise (resolve, reject) ->
+  new PromisedString (resolve, reject) ->
     setImmediate -> 
       resolve("promises, deferreds, builtins, javascript, asynchronous")
-  new PromisedString keywordsFieldPromise
 
 # We play dumb and act like this is synchronous code,
 # and like the objects in play are actual builtins.
