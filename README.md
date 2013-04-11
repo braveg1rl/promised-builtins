@@ -1,4 +1,4 @@
-# promised-builtins
+# promised-builtins [![Build Status](https://travis-ci.org/meryn/promised-builtins.png?branch=master)](https://travis-ci.org/meryn/promised-builtins)
 
 Promises that somewhat act like the instances of the builtins that are promised. An instance of `PromisedString` acts somewhat like an instance of `String`. An instance of `PromisedArray` acts somewhat like an instance of `Array`.
 
