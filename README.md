@@ -4,7 +4,7 @@ Promises that somewhat act like the instances of the builtins that are promised.
 
 All in all, this should be considered a code experiment.
 
-## What are builtins
+## Project scope
 
 Builtin is short-hand for built-in object. The ECMAScript 5 specification defines a built-in object as follows:
 
@@ -17,7 +17,7 @@ I'm only concerned about built-in objects of which one can instantiate an instan
 
 `Object` and `Function` are certainly interesting too. I'll attend to them in a later stage.
 
-### How promised builtins function
+## How promised builtins function
 
 Basically, a promised builtin has the same methods as the builtin that is promised. This is where the similarity ends. Most notable:
 
