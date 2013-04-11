@@ -1,11 +1,25 @@
 # promised-builtins
 
-Promises that somewhat act like the builtins that are promised.
-All in all, this should be considered an experiment in code.
+Promises that somewhat act like the instances of the builtins that are promised. An instance of `PromisedString` acts somewhat like an instance of `String`. An instance of `PromisedArray` acts somewhat like an instance of Array.
+
+All in all, this should be considered a code experiment.
+
+## What are builtins
+
+Builtin is short-hand for built-in object. The ECMAScript 5 specification defines a built-in object as follows:
+
+> built-in object
+> object supplied by an ECMAScript implementation, independent of the host environment, that is present at the start of the execution of an ECMAScript program.
+
+[ECMAScript5.1 Spec 4.3.7](http://es5.github.io/#x4.3.6)
+
+I'm only concerned about built-in objects of which one can instantiate an instance through a constructor function. These constructor functions are listed in [ECMAScript 5.1 Spec 15.1.4](http://es5.github.io/#x15.1.4). Moreover, I'll limit myself to `Array`, `String`, `Boolean`, `Number` and `Date`, because these are the most typical kinds of objects one regularly deals with in simple scripting.
+
+`Object` and `Function` are certainly interesting too. I'll attend to them in a later stage.
 
 ## Usage
 
-Promised builtins are wrap regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec).
+Promised builtins wrap regular [Promise/A+ promises](https://github.com/promises-aplus/promises-spec).
 
 ```coffee
 deferred = Q.defer() # create a deferred with something, anything
