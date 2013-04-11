@@ -48,10 +48,17 @@ getKeywordsField = ->
 
 # We play dumb and act like this is synchronous code,
 # and like the objects in play are actual builtins.
+<<<<<<< HEAD
 keywordsField = getKeywordsField() # a promised string
 keywords = keywordsField.split ", " # a promised array
 keywords.forEach (keyword) -> console.log keyword # works
 keywordsField = keywords.join "," # a promised string, again
+=======
+keywordsField = getKeywordsField()
+keywords = keywordsField.split ", "
+keywords.forEach (keyword) -> console.log keyword # works
+keywordsField = keywords.join ","
+>>>>>>> dc39fd5930ab3a031a1f7f2234e1a590ad941f34
 keywordsField.then (keywordsField) -> console.log keywordsField
 ```
 
