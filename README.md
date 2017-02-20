@@ -1,5 +1,7 @@
 # promised-builtins [![Build Status](https://travis-ci.org/meryn/promised-builtins.png?branch=master)](https://travis-ci.org/meryn/promised-builtins)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/braveg1rl/promised-builtins.svg)](https://greenkeeper.io/)
+
 Promises that somewhat act like the instances of the builtins that are promised. An instance of `PromisedString` acts somewhat like an instance of `String`. An instance of `PromisedArray` acts somewhat like an instance of `Array`.
 
 All in all, this should be considered a code experiment.
