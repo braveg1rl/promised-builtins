@@ -12,12 +12,12 @@
   },
   "private": false,
   "dependencies": {
-    "rsvp": "~1.2.0",
+    "rsvp": "~3.3.3",
     "setimmediate": "~1.0.1"
   },
   "devDependencies": {
-    "coffee-script": "~1.6.2",
-    "mocha": "~1.9.0"
+    "coffee-script": "~1.12.4",
+    "mocha": "~3.2.0"
   },
   "optionalDependencies": {},
   "engines": {
